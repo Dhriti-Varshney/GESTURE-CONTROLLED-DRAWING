@@ -1,38 +1,67 @@
-# GESTURE-CONTROLLED-DRAWING
-# ✋ Gesture-Controlled Drawing
+# 🔥 Two-Hand Gesture-Controlled Anime Power
 
-A real-time computer vision project that allows you to draw on the screen using **hand gestures** through a webcam.
+A computer vision project that turns **hand gestures into an anime-style energy attack**.
 
-The project uses **MediaPipe** to detect hand landmarks and **OpenCV** to process the webcam feed and create the drawing canvas.
+Using a webcam and real-time hand tracking, both hands are used to charge an energy ball made from **purple and red energy with fire-like particles**. Once enough energy is charged, separating the hands launches the energy projectile.
 
-## 🎯 Features
+This project is an experiment in combining **computer vision, gesture recognition, particle effects, and interactive graphics**.
 
-* Real-time hand tracking using a webcam
-* Index finger tracking for drawing
-* ✊ Fist gesture for erasing
-* ✋ Open hand to stop drawing
-* Real-time visual feedback of hand landmarks
-* Drawing directly on the webcam screen
+---
+
+## ⚡ Features
+
+* 👐 Two-hand gesture detection
+* 🔴🟣 Red and purple energy ball
+* 🔥 Fire-like particles and energy effects
+* ⚡ Energy arcs around the ball
+* 📈 Charge system that increases the power of the attack
+* 💥 Energy projectile with a glowing trail
+* ✨ Particle effects during charging and firing
+* 🎯 Projectile direction based on hand movement
+* 📷 Real-time webcam interaction
+
+---
+
+## 🎮 Controls
+
+| Gesture / Action             | Effect             |
+| ---------------------------- | ------------------ |
+| 👐 Both hands close together | Create energy ball |
+| 🤲 Hold hands together       | Charge energy      |
+| ↔️ Separate hands            | Fire energy ball   |
+| `Q`                          | Quit               |
+
+The longer the energy ball is charged, the larger and more powerful the projectile becomes.
+
+---
 
 ## 🛠️ Technologies Used
 
 * **Python**
-* **OpenCV** – webcam access, image processing and display
-* **MediaPipe** – hand landmark detection
-* **NumPy** – canvas and image operations
+* **OpenCV** – webcam capture, image processing and rendering
+* **MediaPipe** – real-time hand landmark detection
+* **NumPy** – image and graphics operations
+* **Random / Math** – particle movement and energy effects
+
+---
 
 ## 📁 Project Structure
 
 ```text
 GESTURE-CONTROLLED-DRAWING/
 │
-├── main.py
+├── anime.py
 ├── hand_landmarker.task
 ├── README.md
+├── .gitignore
 └── venv/
 ```
 
-## ⚙️ Setup
+> The `venv` folder should not be uploaded to GitHub. Add it to `.gitignore`.
+
+---
+
+## ⚙️ Installation
 
 ### 1. Clone the repository
 
@@ -55,69 +84,206 @@ For Git Bash on Windows:
 source venv/Scripts/activate
 ```
 
-### 4. Install dependencies
+### 4. Install the required libraries
 
 ```bash
 pip install opencv-python mediapipe numpy
 ```
 
-## ▶️ Run the Project
+---
 
-Make sure your webcam is connected and run:
+## 📦 MediaPipe Model
 
-```bash
-python main.py
+This project uses the **MediaPipe Hand Landmarker** model to detect hand landmarks.
+
+The required model file is:
+
+```text
+hand_landmarker.task
 ```
 
-A webcam window will open.
+Make sure this file is located in the same directory as `anime.py`.
 
-### Controls
+---
 
-| Gesture         | Action       |
-| --------------- | ------------ |
-| ☝️ Index finger | Draw         |
-| ✋ Open hand     | Stop drawing |
-| ✊ Fist          | Erase        |
-| `Q`             | Exit         |
+## ▶️ Running the Project
+
+Activate the virtual environment:
+
+```bash
+source venv/Scripts/activate
+```
+
+Then run:
+
+```bash
+python anime.py
+```
+
+A webcam window should open.
+
+Place both hands in front of the camera and bring them closer together.
+
+---
 
 ## 🧠 How It Works
 
-The webcam captures live video using OpenCV.
-
-MediaPipe detects the hand and provides the coordinates of different hand landmarks. The program tracks the position of the **index finger** and uses its movement to draw on a virtual canvas.
-
-Different finger positions are used to identify basic gestures:
+The project follows this pipeline:
 
 ```text
-Webcam
-   ↓
-OpenCV
-   ↓
-MediaPipe Hand Detection
-   ↓
-Hand Landmarks
-   ↓
-Gesture Recognition
-   ↓
-Drawing / Erasing
-   ↓
-Screen
+             WEBCAM
+                ↓
+          OpenCV Capture
+                ↓
+        MediaPipe Hand Tracking
+                ↓
+        Detect Two Hands
+                ↓
+       Calculate Hand Positions
+                ↓
+       Calculate Hand Distance
+                ↓
+          Energy Charging
+                ↓
+       ┌────────┴────────┐
+       ↓                 ↓
+   Energy Ball       Fire Particles
+       ↓                 ↓
+       └────────┬────────┘
+                ↓
+         Projectile System
+                ↓
+          Visual Effects
+                ↓
+              SCREEN
 ```
 
-## 🚀 Future Improvements
+### 1. Hand Detection
 
-Some features I plan to explore:
+MediaPipe detects the landmarks of both hands in real time.
 
-* 🎨 Multiple drawing colors
-* 📏 Adjustable brush size
-* ↩️ Undo and redo
-* 💾 Save drawings as images
-* ✌️ More gesture controls
-* 🖐️ Improved gesture recognition
-* 🎮 Turn the project into a gesture-controlled interactive application
+The program uses these landmarks to determine the approximate position of each palm.
 
-## 📌 Note
+### 2. Energy Formation
 
-This project was built as a learning project to explore **computer vision, hand tracking, gesture recognition, and real-time image processing** using Python.
+The distance between the two palms is calculated.
 
-More improvements and experiments will be added as I continue developing it.
+When the hands are close enough, the program enters the **charging state**.
+
+### 3. Charging
+
+While the hands remain together:
+
+* Energy power increases
+* The energy ball grows
+* Red and purple effects appear
+* Fire particles are generated
+* Energy arcs appear around the ball
+
+### 4. Firing
+
+When the hands separate after charging, the program creates an energy projectile.
+
+The projectile contains:
+
+* 🔴 Red energy
+* 🟣 Purple energy
+* 🔥 Fire particles
+* ⚡ Energy arcs
+* ✨ Glowing core
+* 💨 Energy trail
+
+### 5. Particle System
+
+Particles are continuously created around the energy ball and projectile.
+
+Each particle has properties such as:
+
+```text
+Position
+Velocity
+Size
+Lifetime
+Type
+```
+
+This creates the appearance of moving fire and energy.
+
+---
+
+## 🚀 Current Version
+
+### Version 1 — Two-Hand Energy Ball
+
+The current version focuses on:
+
+```text
+👐
+ ↓
+🔴🟣 Charge
+ ↓
+🔥 Energy Ball
+ ↓
+💥 Fire
+ ↓
+🔴🟣 Projectile
+```
+
+---
+
+## 🔮 Future Improvements
+
+This project is still being developed. Possible improvements include:
+
+* 🎯 More accurate projectile aiming
+* 🤜 Physical forward hand thrust to fire
+* 💥 Larger impact explosions
+* 🌪️ Shockwaves
+* 📳 Camera shake
+* ✨ Motion blur
+* 🔥 Better fire simulation
+* 🛡️ Different defensive gestures
+* ⚔️ Multiple attack types
+* 🎨 Custom anime-style visual effects
+* 🧍 Full-body gesture interaction
+* 🎮 Turn the project into a complete gesture-controlled game
+
+---
+
+## 📌 Project Goal
+
+The goal of this project is to explore how **computer vision and gesture recognition can be combined with visual effects to create interactive experiences**.
+
+Instead of controlling an application with a keyboard or mouse, the user becomes the controller.
+
+---
+
+## 👨‍💻 Built With
+
+**Python + OpenCV + MediaPipe**
+
+Created as a hands-on project to learn and experiment with:
+
+* Computer Vision
+* Hand Tracking
+* Gesture Recognition
+* Real-Time Image Processing
+* Particle Systems
+* Interactive Graphics
+
+---
+
+## ⭐ Future Vision
+
+The long-term goal is to turn this into a complete **gesture-controlled anime combat system**, where different hand gestures trigger different abilities.
+
+```text
+👐  → Energy
+✊  → Charge
+🖐️  → Fire
+✌️  → Shield
+🤏  → Compress
+👊  → Melee Attack
+```
+
+More abilities and effects will be added as the project develops.
